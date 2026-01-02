@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Путь героя — фан-справочник</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f0c;
+      --card: #1c2a1f;
+      --border: #3498db;
+      --text: #ffa500;
+      --muted: #8fa99a;
+      --danger: #e74c3c;
+      --hover: #2ecc71;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Arial', sans-serif; background: var(--bg); color: var(--text); }
+    header { padding: 20px; text-align: center; background: #07110b; border-bottom: 3px solid var(--border); }
+    header h1 { font-family: 'Press Start 2P', monospace; font-size: 24px; color: var(--text); margin: 0; }
+    header .subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .warning { color: var(--danger); font-weight: 700; margin-top: 6px; font-size: 12px; }
+    main { max-width: 1200px; margin: 0 auto; padding: 16px; }
+    .tabs { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+    .tab { padding: 10px 16px; border: 2px solid var(--border); border-radius: 8px; cursor: pointer; background: var(--card); color: var(--text); font-weight: bold; }
+    .tab.active { background: var(--border); color: #000; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(280px,1fr)); gap: 18px; }
+    .card { background: var(--card); border: 2px solid var(--border); border-radius: 12px; padding: 16px; font-weight: 600; }
+    .card h3 { margin: 0 0 8px 0; color: var(--text); font-weight: bold; }
+    .world { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+    .stat { font-size: 11px; margin-bottom: 3px; }
+    footer { margin-top: 30px; padding: 16px; border-top: 2px solid var(--border); font-size: 12px; color: var(--muted); text-align: center; }
+    footer a { color: var(--text); text-decoration: none; }
+  </style>
+</head>
+<body><header>
+  <h1>Путь героя — фан-справочник</h1>
+  <div class="subtitle">Сервер Лололошки • Характеристики мобов</div>
+  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>
+</header><main>
+  <div class="tabs">
+    <button class="tab active" data-tab="mobs">Мобы</button>
+    <button class="tab" data-tab="items">Предметы</button>
+    <button class="tab" data-tab="prestige">Престиж</button>
+  </div>  <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:20px;">
+    <input id="searchInput" placeholder="Поиск моба...">
+    <select id="worldSelect">
+      <option value="all">Все миры</option>
+      <option value="Даливарика">Даливарика</option>
+      <option value="Миср">Миср</option>
+      <option value="Алотерра">Алотерра</option>
+    </select>
+  </div>  <section id="mobs" class="tab-content active">
+    <div class="grid" id="mobGrid"></div>
+  </section>  <section id="items" class="tab-content">
+    <div class="grid" id="itemGrid"></div>
+  </section>  <section id="prestige" class="tab-content">
+    <div class="card">
+      <h3>1 уровень престижа</h3>
+      <ul>
+        <li>Урон 1x → 1.15x</li>
+        <li>Защита 1x → 1.15x</li>
+        <li>Здоровье 1x → 1.15x</li>
+        <li>Регенерация 1x → 1.16x</li>
+        <li>Скорость 1x → 1x</li>
+        <li>Золото 1x → 2.9x</li>
+        <li>Опыт 1x → 2.9x</li>
+      </ul>
+      <p>Для повышения: достичь 100 уровня и выполнить квесты на Междумирье</p>
+    </div>
+    <div class="card">
+      <h3>2 уровень престижа</h3>
+      <ul>
+        <li>Урон 1.15x → 1.32x</li>
+        <li>Защита 1.15x → 1.31x</li>
+        <li>Здоровье 1.15x → 1.32x</li>
+        <li>Регенерация 1.16x → 1.33x</li>
+        <li>Скорость 1x → 1x</li>
+        <li>Золото 2.9x → 8.41x</li>
+        <li>Опыт 2.9x → 8.41x</li>
+      </ul>
+      <p>Для повышения: достичь 100 уровня и выполнить квесты на Междумирье</p>
+    </div>
+  </section>
+</main><footer>
+  <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
+  <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
+</footer><script>
+// ===== Вкладки =====
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+  });
+});
+
+// ===== Мобы =====
+const mobs = [
+  {name:'Нежить', world:'Даливарика', drops:['Шлем Тёмного Рыцаря — 6%','Вороной герб — 10%','Сломанная кость — 10%']},
+  {name:'Векс', world:'Даливарика', drops:['Ботинки Тёмного Рыцаря — 6%','Осколок чёрного металла — 10%','Фрагмент папируса — 10%']},
+  {name:'Поборник', world:'Даливарика', drops:['Штаны Тёмного Рыцаря — 6%','Вороной герб — 10%','Камушек — 10%']},
+  {name:'Природный элементаль', world:'Даливарика', drops:['Кираса Тёмного Рыцаря — 6%','Осколок чёрного металла — 10%','Вороной герб — 10%','Сломанная кость — 10%','Фрагмент папируса — 10%','Камушек — 10%']},
+  {name:'Гримуар', world:'Даливарика', drops:['Все свитки брони','Осколок чёрного металла — 14%','Вороной герб — 14%','Сломанная кость — 14%','Фрагмент папируса — 14%','Камушек — 14%']},
+  {name:'Спектральный некромант', world:'Даливарика', drops:['Все свитки брони','Осколок чёрного металла — 20%','Вороной герб — 20%','Сломанная кость — 20%','Фрагмент папируса — 20%','Камушек — 20%']},
+  {name:'Городской разбойник', world:'Миср', drops:['Шлем Повелителя Песков — 6%','Песчинка всевластия — 10%','Рунная плита — 10%']},
+  {name:'Тоифэтун', world:'Миср', drops:['Ботинки Повелителя Песков — 6%','Сердце Джинна — 10%','Аметистовый кристалл — 10%']},
+  {name:'Кристаллический жук', world:'Миср', drops:['Штаны Повелителя Песков — 6%','Песчинка всевластия — 10%','Клочок шёлка — 10%']},
+  {name:'Пещерный скорпион', world:'Миср', drops:['Кираса Повелителя Песков — 6%','Сердце Джинна — 10%','Песчинка всевластия — 10%','Аметистовый кристалл — 10%','Рунная плита — 10%','Клочок шёлка — 10%']},
+  {name:'Чудовище', world:'Миср', drops:['Все свитки брони','Сердце Джинна — 14%','Песчинка всевластия — 14%','Аметистовый кристалл — 14%','Рунная плита — 14%','Клочок шёлка — 14%']},
+  {name:'Отверженный', world:'Миср', drops:['Все свитки брони','Сердце Джинна — 20%','Песчинка всевластия — 20%','Аметистовый кристалл — 20%','Рунная плита — 20%','Клочок шёлка — 20%']},
+  {name:'Имперский полицейский', world:'Алотерра', drops:['Шлем Инспектора Империи — 5%','Первичная материя — 7%','Мини-реактор — 7%']},
+  {name:'Имперский пёс', world:'Алотерра', drops:['Ботинки Инспектора Империи — 5%','Сгусток субстанции — 7%','Технопластина — 7%']},
+  {name:'Автономный бот', world:'Алотерра', drops:['Штаны Инспектора Империи — 5%','Микросхема — 7%','Мини-реактор — 7%']},
+  {name:'АПМ-ТАРАН', world:'Алотерра', drops:['Кираса Инспектора Империи — 5%','Мини-реактор — 10%','Технопластина — 10%','Микросхема — 10%','Сгусток субстанции — 10%','Первичная материя — 10%']},
+  {name:'АПМ-Хищник', world:'Алотерра', drops:['Мини-реактор — 14%','Технопластина — 14%','Микросхема — 14%','Сгусток субстанции — 14%','Первичная материя — 14%']},
+  {name:'АПМ-Жало', world:'Алотерра', drops:['Мини-реактор — 17%','Технопластина — 17%','Микросхема — 17%','Сгусток субстанции — 17%','Первичная материя — 17%']}
+];
+
+function renderMobs(){
+  const grid = document.getElementById('mobGrid');
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const w = document.getElementById('worldSelect').value;
+  grid.innerHTML='';
+  mobs.filter(m => (w==='all'||m.world===w)).filter(m => m.name.toLowerCase().includes(q)).forEach(m=>{
+    const c=document.createElement('div');
+    c.className='card';
+    c.innerHTML=`<h3>${m.name}</h3><div class="world">Мир: ${m.world}</div>`+m.drops.map(d=>`<div class="stat">• ${d}</div>`).join('');
+    grid.appendChild(c);
+  });
+}
+renderMobs();
+document.getElementById('searchInput').addEventListener('input',renderMobs);
+document.getElementById('worldSelect').addEventListener('change',renderMobs);
+
+// ===== Предметы =====
+const items = [
+  {name:'Шлем Тёмного Рыцаря', description:'Часть сета брони Даливарики', mobs:['Нежить']},
+  {name:'Ботинки Тёмного Рыцаря', description:'Часть сета брони Даливарики', mobs:['Векс']},
+  {name:'Штаны Тёмного Рыцаря', description:'Часть сета брони Даливарики', mobs:['Поборник']},
+  {name:'Кираса Тёмного Рыцаря', description:'Часть сета брони Даливарики', mobs:['Природный элементаль']},
+  {name:'Свитки брони', description:'Все части брони', mobs:['Гримуар','Спектральный некромант','Чудовище','Отверженный']},
+  {name:'Песчинка всевластия', description:'Редкий ресурс Мисра', mobs:['Городской разбойник','Кристаллический жук','Пещерный скорпион','Чудовище','Отверженный']},
+  {name:'Сердце Джинна', description:'Магический предмет', mobs:['Тоифэтун','Пещерный скорпион','Чудовище','Отверженный']},
+  {name:'Аметистовый кристалл', description:'Кристалл с магией', mobs:['Тоифэтун','Пещерный скорпион','Чудовище','Отверженный']},
+  {name:'Рунная плита', description:'Древняя плита с рунами', mobs:['Городской разбойник','Пещерный скорпион','Чудовище','Отверженный']},
+  {name:'Клочок шёлка', description:'Выпадает с существ Мисра', mobs:['Кристаллический жук','Пещерный скорпион','Чудовище','Отверженный']}
+];
+function renderItems(){
+  const grid = document.getElementById('itemGrid');
+  grid.innerHTML='';
+  items.forEach(i=>{
+    const c=document.createElement('div');
+    c.className='card';
+    c.innerHTML=`<h3>${i.name}</h3><div class="description">${i.description}</div><div class="stat"><b>Падает с мобов:</b> ${i.mobs.join(', ')}</div>`;
+    grid.appendChild(c);
+  });
+}
+renderItems();
+</script></body>
+</html>
