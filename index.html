@@ -1,158 +1,203 @@
-<!DOCTYPE html><html lang="ru">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Путь героя — фан-справочник</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #0b0f0c;
-      --card: #1c2a1f;
-      --accent: #3498db;
-      --text: #ffa500;
-      --muted: #8fa99a;
-      --danger: #e74c3c;
-      --hover: #2ecc71;
-    }* { box-sizing: border-box; }
-body {
-  margin: 0;
-  font-family: 'Press Start 2P', monospace;
-  background: linear-gradient(120deg, #102218, #0d1b14);
-  color: var(--text);
-}
+:root{
+  --bg:#05070a;
+  --card:#0b1220;
+  --border:#1e88ff;
+  --accent:#ff9800;
+  --text:#e8f0ff;
+  --muted:#9fb4d8;
+}*{box-sizing:border-box}
 
-header {
-  padding: 20px;
-  text-align: center;
-  background: #07110b;
-  border-bottom: 3px solid var(--accent);
-}
+body{ margin:0; background:radial-gradient(circle at top,#0a1020,#05070a 60%); color:var(--text); font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif; line-height:1.6; font-weight:700; }
 
-header h1 { font-size: 24px; color: var(--accent); margin: 0; }
-header .subtitle { font-size: 12px; color: var(--muted); margin-top: 4px; }
-.warning { color: var(--danger); font-weight: 700; margin-top: 6px; font-size: 12px; }
+header{ background:#05070a; border-bottom:3px solid var(--border); padding:20px; text-align:center; }
 
-main { max-width: 1200px; margin: 0 auto; padding: 16px; }
+header h1{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:22px; margin:0; } 
+.subtitle{color:var(--muted);font-size:13px;margin-top:6px;font-weight:700} 
+.warning{color:#ff5252;font-size:12px;margin-top:6px;font-weight:700}
 
-.controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; justify-content: center; }
-input, select {
-  background: #0f1f12;
-  border: 2px solid var(--accent);
-  color: var(--text);
-  padding: 8px 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  transition: 0.2s;
-}
-input:focus, select:focus { border-color: var(--hover); outline: none; }
+.tabs{ display:flex; justify-content:center; gap:12px; margin-top:16px; flex-wrap:wrap; }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 18px;
-}
+.tab{ font-family:'Press Start 2P',monospace; background:var(--card); border:2px solid var(--border); color:var(--text); padding:10px 16px; border-radius:12px; cursor:pointer; transition:.2s; font-weight:700; }
 
-.card {
-  background: linear-gradient(180deg, #12261b, var(--card));
-  border: 2px solid var(--accent);
-  border-radius: 12px;
-  padding: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.45);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.6); }
+.tab:hover{box-shadow:0 0 12px rgba(30,136,255,.6)} 
+.tab.active{ background:rgba(30,136,255,.15); box-shadow:0 0 18px rgba(30,136,255,.8); }
 
-.card h3 { margin: 0 0 8px 0; color: var(--accent); font-size: 14px; font-weight: bold; }
-.world { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
-.stat { font-size: 11px; margin-bottom: 3px; }
-.stat span { color: var(--muted); }
+main{max-width:1300px;margin:0 auto;padding:26px}
 
-footer { margin-top: 30px; padding: 16px; border-top: 2px solid var(--accent); font-size: 12px; color: var(--muted); text-align: center; }
-footer a { color: var(--accent); text-decoration: none; }
+.controls{ display:flex; gap:12px; justify-content:center; margin-bottom:26px; flex-wrap:wrap; }
 
+input,select{ background:#070b14; border:2px solid var(--border); color:var(--text); padding:10px 14px; border-radius:12px; font-size:14px; font-weight:700; }
+
+.grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+
+.card, .item-card, .prestige-card{ background:linear-gradient(180deg,#0d162a,var(--card)); border:2px solid var(--border); border-radius:18px; padding:22px; box-shadow:0 0 20px rgba(30,136,255,.15); font-weight:700; }
+
+.card h3, .item-card h3, .prestige-card h3{ font-family:'Press Start 2P',monospace; color:var(--accent); font-size:14px; margin:0 0 14px 0; font-weight:700; }
+
+.world{color:var(--muted);font-size:13px;margin-bottom:10px;font-weight:700} 
+.stat{font-size:14px;margin-bottom:6px;color:var(--text);font-weight:700}
+
+.items-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:22px; margin-top:22px; }
+
+section h2{ font-family:'Press Start 2P',monospace; color:var(--accent); margin-bottom:18px; font-weight:700; }
+
+footer{ border-top:2px solid var(--border); margin-top:40px; padding:20px; text-align:center; color:var(--muted); font-weight:700; } 
+footer a{color:var(--accent);text-decoration:none;font-weight:700}
+
+.tab-content{display:none} 
+.tab-content.active{display:block} 
   </style>
 </head>
-<body><header>
+<body>
+<header>
   <h1>Путь героя — фан-справочник</h1>
-  <div class="subtitle">Сервер Лололошки • Характеристики мобов</div>
-  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>
-</header><main>
-  <div class="controls">
-    <input id="search" placeholder="Поиск по имени…" />
-    <select id="worldFilter">
-      <option value="all">Все миры</option>
-      <option value="Даливарика">Даливарика</option>
-      <option value="Миср">Миср</option>
-      <option value="Алотерра">Алотерра</option>
-    </select>
-  </div>  <div id="cards" class="grid"></div>  <section id="items">
-    <h2>Предметы</h2>
-    <p class="note">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ. Информация собирается игроками.</p><div class="grid" id="itemGrid"></div>
-
-<p class="tg">Есть доп. информация или ошибки — писать в бота <b>@YoutubeHopper_bot</b></p>
-
-  </section>  <section id="prestige">
-    <h2>Престиж</h2>
-    <p class="note">Престиж — это перерождение, доступное после достижения <b>100 уровня</b>.</p><div class="card">
-  <h3>1 уровень престижа</h3>
-  <ul>
-    <li>Урон 1x → 1.15x</li>
-    <li>Защита 1x → 1.15x</li>
-    <li>Здоровье 1x → 1.15x</li>
-    <li>Регенерация 1x → 1.16x</li>
-    <li>Скорость 1x → 1x</li>
-    <li>Золото 1x → 2.9x</li>
-    <li>Опыт 1x → 2.9x</li>
-  </ul>
-</div>
-
-<div class="card">
-  <h3>2 уровень престижа</h3>
-  <ul>
-    <li>Урон 1.15x → 1.32x</li>
-    <li>Защита 1.15x → 1.31x</li>
-    <li>Здоровье 1.15x → 1.32x</li>
-    <li>Регенерация 1.16x → 1.33x</li>
-    <li>Скорость 1x → 1x</li>
-    <li>Золото 2.9x → 8.41x</li>
-    <li>Опыт 2.9x → 8.41x</li>
-  </ul>
-  <p>Для повышения: достичь 100 уровня и выполнить квесты на Междумирье</p>
-</div>
-
+  <div class="subtitle">Сервер Лололошки • Характеристики и механики</div>
+  <div class="warning">⚠ САЙТ НЕ ОФИЦИАЛЬНЫЙ</div>  
+  <nav class="tabs">
+    <button class="tab active" data-tab="mobs">Мобы</button>
+    <button class="tab" data-tab="items">Предметы</button>
+    <button class="tab" data-tab="prestige">Престиж</button>
+  </nav>
+</header>
+<main>
+  <section id="tab-mobs" class="tab-content active">
+    <div class="controls">
+      <input id="search" placeholder="Поиск по имени…" />
+      <select id="worldFilter">
+        <option value="all">Все миры</option>
+        <option value="Даливарика">Даливарика</option>
+        <option value="Миср">Миср</option>
+        <option value="Алотерра">Алотерра</option>
+      </select>
+    </div>
+    <div id="cards" class="grid"></div>
   </section>
-</main><footer>
+
+  <section id="tab-items" class="tab-content">
+    <h2>Предметы</h2>
+    <div class="items-grid">
+      <div class="item-card"><h3>Свиток Шлем</h3></div>
+      <div class="item-card"><h3>Свиток Ботинки</h3></div>
+      <div class="item-card"><h3>Свиток Штаны</h3></div>
+      <div class="item-card"><h3>Свиток Кираса</h3></div>
+      <div class="item-card"><h3>Вороной герб</h3></div>
+      <div class="item-card"><h3>Сломанная кость</h3></div>
+      <div class="item-card"><h3>Фрагмент папируса</h3></div>
+      <div class="item-card"><h3>Камушек</h3></div>
+      <div class="item-card"><h3>Песчинка всевластия</h3></div>
+      <div class="item-card"><h3>Сердце Джинна</h3></div>
+      <div class="item-card"><h3>Аметистовый кристалл</h3></div>
+      <div class="item-card"><h3>Рунная плита</h3></div>
+      <div class="item-card"><h3>Клочок шёлка</h3></div>
+      <div class="item-card"><h3>Первичная материя</h3></div>
+      <div class="item-card"><h3>Мини-реактор</h3></div>
+      <div class="item-card"><h3>Сгусток неизвестной субстанции</h3></div>
+      <div class="item-card"><h3>Технопластина</h3></div>
+      <div class="item-card"><h3>Микросхема</h3></div>
+    </div>
+  </section>
+
+  <section id="tab-prestige" class="tab-content">
+    <h2>Престиж</h2>
+    <div class="prestige-card">
+      <h3>1 уровень престижа</h3>
+      <ul>
+        <li>Урон: 1x → 1.15x</li>
+        <li>Защита: 1x → 1.15x</li>
+        <li>Здоровье: 1x → 1.15x</li>
+        <li>Регенерация: 1x → 1.16x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 1x → 2.9x</li>
+        <li>Опыт: 1x → 2.9x</li>
+      </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+
+      <h3>2 уровень престижа</h3>
+      <ul>
+        <li>Урон: 1.15x → 1.32x</li>
+        <li>Защита: 1.15x → 1.31x</li>
+        <li>Здоровье: 1.15x → 1.32x</li>
+        <li>Регенерация: 1.16x → 1.33x</li>
+        <li>Скорость: 1x → 1x</li>
+        <li>Золото: 2.9x → 8.41x</li>
+        <li>Опыт: 2.9x → 8.41x</li>
+      </ul>
+      <p><b>Условия:</b> 100 уровень + квесты Междумирья</p>
+    </div>
+  </section>
+</main>
+
+<footer>
   <div>Есть доп. информация или вопросы — писать в Telegram-бота</div>
   <div><a href="https://t.me/YoutubeHopper_bot" target="_blank">@YoutubeHopper_bot</a></div>
-</footer><script>
+</footer>
+
+<script>
+// Вкладки
+document.querySelectorAll('.tab').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+    btn.classList.add('active');
+    document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+// Мобы
 const enemies = [
-  { world: 'Даливарика', name: 'Нежить', drops: ['Шлем Тёмного Рыцаря','Ботинки Тёмного Рыцаря','Штаны Тёмного Рыцаря','Кираса Тёмного Рыцаря','Вороной герб','Сломанная кость'] },
-  { world: 'Даливарика', name: 'Векс', drops: ['Шлем Тёмного Рыцаря','Ботинки Тёмного Рыцаря','Штаны Тёмного Рыцаря','Кираса Тёмного Рыцаря','Осколок чёрного металла','Фрагмент папируса'] },
-  { world: 'Миср', name: 'Городской разбойник', drops: ['Шлем Повелителя Песков','Ботинки Повелителя Песков','Штаны Повелителя Песков','Кираса Повелителя Песков','Песчинка всевластия','Рунная плита'] }
-  // Добавь остальных мобов и их дропы аналогично
+  // ===== Даливарика =====
+  { world: 'Даливарика', order: 1, name: 'Нежить', drops: ['Свиток Шлем','Вороной герб','Сломанная кость'] },
+  { world: 'Даливарика', order: 2, name: 'Векс', drops: ['Свиток Ботинки','Осколок чёрного металла','Фрагмент папируса'] },
+  { world: 'Даливарика', order: 3, name: 'Поборник', drops: ['Свиток Штаны','Вороной герб','Камушек'] },
+  { world: 'Даливарика', order: 4, name: 'Природный элементаль', drops: ['Свиток Кираса','Осколок чёрного металла','Вороной герб','Сломанная кость','Фрагмент папируса','Камушек'] },
+  { world: 'Даливарика', order: 5, name: 'Гримуар', drops: ['Свиток Шлем','Свиток Ботинки','Свиток Штаны','Свиток Кираса','Осколок чёрного металла','Вороной герб','Сломанная кость','Фрагмент папируса','Камушек'] },
+  { world: 'Даливарика', order: 6, name: 'Спектральный некромант', drops: ['Свиток Шлем','Свиток Ботинки','Свиток Штаны','Свиток Кираса','Осколок чёрного металла','Вороной герб','Сломанная кость','Фрагмент папируса','Камушек'] },
+  // ===== Миср =====
+  { world: 'Миср', order: 1, name: 'Городской разбойник', drops: ['Свиток Шлем','Песчинка всевластия','Рунная плита'] },
+  { world: 'Миср', order: 2, name: 'Тоифэтун', drops: ['Свиток Ботинки','Сердце Джинна','Аметистовый кристалл'] },
+  { world: 'Миср', order: 3, name: 'Кристаллический жук', drops: ['Свиток Штаны','Песчинка всевластия','Клочок шёлка'] },
+  { world: 'Миср', order: 4, name: 'Пещерный скорпион', drops: ['Свиток Кираса','Сердце Джинна','Песчинка всевластия','Аметистовый кристалл','Рунная плита','Клочок шёлка'] },
+  { world: 'Миср', order: 5, name: 'Чудовище', drops: ['Свиток Шлем','Свиток Ботинки','Свиток Штаны','Свиток Кираса','Сердце Джинна','Песчинка всевластия','Аметистовый кристалл','Рунная плита','Клочок шёлка'] },
+  { world: 'Миср', order: 6, name: 'Отверженный', drops: ['Свиток Шлем','Свиток Ботинки','Свиток Штаны','Свиток Кираса','Сердце Джинна','Песчинка всевластия','Аметистовый кристалл','Рунная плита','Клочок шёлка'] },
+  // ===== Алотерра =====
+  { world: 'Алотерра', order: 1, name: 'Имперский полицейский', drops: ['Свиток Шлем','Первичная материя','Мини-реактор'] },
+  { world: 'Алотерра', order: 2, name: 'Имперский пёс', drops: ['Свиток Ботинки','Сгусток неизвестной субстанции','Технопластина'] },
+  { world: 'Алотерра', order: 3, name: 'Автономный бот', drops: ['Свиток Штаны','Микросхема','Мини-реактор'] },
+  { world: 'Алотерра', order: 4, name: 'ΑΠΜ-ΤΑΡAH', drops: ['Свиток Кираса','Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная материя'] },
+  { world: 'Алотерра', order: 5, name: 'АПМ-Хищник', drops: ['Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная материя'] },
+  { world: 'Алотерра', order: 6, name: 'АПМ-Жало', drops: ['Мини-реактор','Технопластина','Микросхема','Сгусток неизвестной субстанции','Первичная материя'] }
 ];
 
 const cards = document.getElementById('cards');
 const search = document.getElementById('search');
 const worldFilter = document.getElementById('worldFilter');
 
-function render() {
+function renderMobs() {
   const q = search.value.toLowerCase();
   const w = worldFilter.value;
   cards.innerHTML = '';
-
   enemies.filter(e => (w === 'all' || e.world === w))
          .filter(e => e.name.toLowerCase().includes(q))
          .forEach(e => {
-            const div = document.createElement('div');
-            div.className = 'card';
-            div.innerHTML = `<h3>${e.name}</h3><div class="world">Мир: ${e.world}</div>` + e.drops.map(d => `<div class="stat">• ${d}</div>`).join('');
-            cards.appendChild(div);
+           const div = document.createElement('div');
+           div.className = 'card';
+           div.innerHTML = `<h3>${e.order}. ${e.name}</h3><div class="world">Мир: ${e.world}</div>${e.drops.map(d=>`<div class="stat">• ${d}</div>`).join('')}`;
+           cards.appendChild(div);
          });
 }
 
-search.addEventListener('input', render);
-worldFilter.addEventListener('change', render);
-render();
-</script></body>
+search.addEventListener('input', renderMobs);
+worldFilter.addEventListener('change', renderMobs);
+renderMobs();
+</script>
+</body>
 </html>
