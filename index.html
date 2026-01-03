@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Путь героя — фан-справочник</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 
 <style>
-/* --- СТИЛИ БЕЗ ИЗМЕНЕНИЙ --- */
 :root{
   --bg:#05070a;
   --card:#0b1220;
@@ -16,269 +15,210 @@
   --accent:#ff9800;
   --text:#e8f0ff;
   --muted:#9fb4d8;
-  --locked: rgba(255,255,255,0.08);
 }
 *{box-sizing:border-box}
 body{
   margin:0;
   background:radial-gradient(circle at top,#0a1020,#05070a 60%);
   color:var(--text);
-  font-family:system-ui,Arial,sans-serif;
+  font-family:system-ui,Arial;
   font-weight:700;
 }
 header{
-  border-bottom:3px solid var(--border);
-  padding:18px;
   text-align:center;
+  padding:20px;
+  border-bottom:3px solid var(--border);
 }
-header h1{
+h1{
   font-family:'Press Start 2P';
   color:var(--accent);
-  font-size:18px;
+  font-size:20px;
 }
-.tabs{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.tabs{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
 .tab{
   font-family:'Press Start 2P';
-  border:2px solid var(--border);
   background:var(--card);
+  border:2px solid var(--border);
   color:var(--text);
-  padding:8px 14px;
+  padding:10px 14px;
   border-radius:12px;
   cursor:pointer;
 }
-.tab.active{color:var(--accent)}
+.tab.active{
+  background:rgba(30,136,255,.2);
+}
+main{max-width:1200px;margin:auto;padding:20px}
 .tab-content{display:none}
 .tab-content.active{display:block}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
-.card{
-  border:2px solid var(--border);
-  background:linear-gradient(180deg,#0d162a,var(--card));
-  border-radius:14px;
-  padding:14px;
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:20px;
 }
-.card h3{
+.card{
+  background:linear-gradient(180deg,#0d162a,var(--card));
+  border:2px solid var(--border);
+  border-radius:16px;
+  padding:18px;
+}
+h3{
   font-family:'Press Start 2P';
-  font-size:12px;
+  font-size:13px;
   color:var(--accent);
 }
-.world{font-size:12px;color:var(--muted)}
+.world{color:var(--muted);font-size:12px;margin-bottom:8px}
 .stat{font-size:13px}
-.fan-desc{font-size:12px;color:#b9d8ff;margin-top:6px}
-main{max-width:1100px;margin:auto;padding:16px}
+
+input{
+  background:#070b14;
+  border:2px solid var(--border);
+  color:white;
+  padding:10px;
+  border-radius:10px;
+  width:100%;
+  margin-top:10px;
+}
+button{
+  margin-top:10px;
+  padding:10px;
+  border-radius:10px;
+  border:2px solid var(--border);
+  background:var(--card);
+  color:white;
+  cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>Путь героя — фан-справочник</h1>
-  <div class="tabs">
-    <button class="tab active" data-tab="mobs">Мобы</button>
-    <button class="tab" data-tab="items">Предметы</button>
-    <button class="tab" data-tab="prestige">Престиж</button>
-    <button class="tab" data-tab="achievements">Достижения</button>
-  </div>
+<h1>Путь героя</h1>
+<div style="color:#ff5252;font-size:12px">⚠ фан-проект, не официальный</div>
+
+<div class="tabs">
+  <button class="tab active" data-tab="mobs">Мобы</button>
+  <button class="tab" data-tab="items">Предметы</button>
+  <button class="tab" data-tab="prestige">Престиж</button>
+  <button class="tab" data-tab="settings">Настройки</button>
+</div>
 </header>
 
 <main>
 
+<!-- МОБЫ -->
 <section id="tab-mobs" class="tab-content active">
-  <div id="cards" class="grid"></div>
+  <div class="grid" id="mobsGrid"></div>
 </section>
 
+<!-- ПРЕДМЕТЫ -->
 <section id="tab-items" class="tab-content">
-  <p>Предметы (без изменений)</p>
+  <div class="grid">
+    <div class="card"><h3>Лоскут бездны</h3><div class="stat">Материал Междумирья</div></div>
+    <div class="card"><h3>Сингулярная жемчужина</h3><div class="stat">Редкий артефакт</div></div>
+    <div class="card"><h3>Кристалл скинта</h3><div class="stat">Источник энергии</div></div>
+  </div>
 </section>
 
+<!-- ПРЕСТИЖ -->
 <section id="tab-prestige" class="tab-content">
-  <p>Престиж (без изменений)</p>
+  <div class="card">
+    <h3>3 уровень престижа</h3>
+    <div class="stat">Урон: 1.32x → 1.52x</div>
+    <div class="stat">Защита: 1.31x → 1.5x</div>
+    <div class="stat">Золото / Опыт: 8.41x → 24.39x</div>
+    <div class="stat"><br>Будущие уровни престижа откроются позже…</div>
+  </div>
 </section>
 
-<section id="tab-achievements" class="tab-content">
-  <p>Достижения (без изменений)</p>
+<!-- НАСТРОЙКИ -->
+<section id="tab-settings" class="tab-content">
+  <div class="card">
+    <h3>Фан-режим</h3>
+    <div class="stat">Доп. сюжет и секреты (не канон)</div>
+  </div>
+
+  <div class="card">
+    <h3>Ввод кода</h3>
+    <input id="codeInput" placeholder="Введите код">
+    <button onclick="activateCode()">Активировать</button>
+  </div>
+
+  <div class="card">
+    <h3>Достижения</h3>
+    <div id="achievementsList"></div>
+  </div>
 </section>
 
 </main>
 
 <script>
-/* ================== МОБЫ (С ИСПРАВЛЕННЫМИ ШАНСАМИ) ================== */
-
-const enemies = [
-
-/* ---------- ДАЛИВАРИКА ---------- */
-
-{
-  world:'Даливарика',
-  order:5,
-  name:'Гримуар',
-  drops:[
-    'Свиток «Шлем Тёмного Рыцаря» — 8%',
-    'Свиток «Ботинки Тёмного Рыцаря» — 8%',
-    'Свиток «Штаны Тёмного Рыцаря» — 8%',
-    'Свиток «Кираса Тёмного Рыцаря» — 8%',
-    'Осколок чёрного метала — 14%',
-    'Вороной герб — 14%',
-    'Сломанная кость — 14%',
-    'Фрагмент папируса — 14%',
-    'Камушек — 14%'
-  ],
-  fan:'Магический том, фан-легенда.'
-},
-{
-  world:'Даливарика',
-  order:6,
-  name:'Спектральный некромант',
-  drops:[
-    'Свиток «Шлем Тёмного Рыцаря» — 10%',
-    'Свиток «Ботинки Тёмного Рыцаря» — 10%',
-    'Свиток «Штаны Тёмного Рыцаря» — 10%',
-    'Свиток «Кираса Тёмного Рыцаря» — 10%',
-    'Осколок чёрного метала — 20%',
-    'Вороной герб — 20%',
-    'Сломанная кость — 20%',
-    'Фрагмент папируса — 20%',
-    'Камушек — 20%'
-  ],
-  fan:'Повелитель теней, фан-миф.'
-},
-
-/* ---------- МИСР ---------- */
-
-{
-  world:'Миср',
-  order:5,
-  name:'Чудовище',
-  drops:[
-    'Свиток «Шлем Повелителя Песков» — 8%',
-    'Свиток «Ботинки Повелителя Песков» — 8%',
-    'Свиток «Штаны Повелителя Песков» — 8%',
-    'Свиток «Кираса Повелителя Песков» — 8%',
-    'Сердце Джинна — 14%',
-    'Песчинка всевластия — 14%',
-    'Аметистовый кристалл — 14%',
-    'Рунная плита — 14%',
-    'Клочок шёлка — 14%'
-  ],
-  fan:'Глубинный гигант.'
-},
-{
-  world:'Миср',
-  order:6,
-  name:'Отверженный',
-  drops:[
-    'Свиток «Шлем Повелителя Песков» — 10%',
-    'Свиток «Ботинки Повелителя Песков» — 10%',
-    'Свиток «Штаны Повелителя Песков» — 10%',
-    'Свиток «Кираса Повелителя Песков» — 10%',
-    'Сердце Джинна — 20%',
-    'Песчинка всевластия — 20%',
-    'Аметистовый кристалл — 20%',
-    'Рунная плита — 20%',
-    'Клочок шёлка — 20%'
-  ],
-  fan:'Проклятая душа пустыни.'
-},
-
-/* ---------- АЛОТЕРРА ---------- */
-
-{
-  world:'Алотерра',
-  order:5,
-  name:'АПМ-ХИЩНИК',
-  drops:[
-    'Свиток «Шлем Инспектора Империи» — 7%',
-    'Свиток «Ботинки Инспектора Империи» — 7%',
-    'Свиток «Штаны Инспектора Империи» — 7%',
-    'Свиток «Кираса Инспектора Империи» — 7%',
-    'Мини-реактор — 14%',
-    'Технопластина — 14%',
-    'Микросхема — 14%',
-    'Сгусток неизвестной субстанции — 14%',
-    'Первичная Материя — 14%'
-  ],
-  fan:'Боевой механо-зверь.'
-},
-{
-  world:'Алотерра',
-  order:6,
-  name:'АПМ-ЖАЛО',
-  drops:[
-    'Свиток «Шлем Инспектора Империи» — 10%',
-    'Свиток «Ботинки Инспектора Империи» — 10%',
-    'Свиток «Штаны Инспектора Империи» — 10%',
-    'Свиток «Кираса Инспектора Империи» — 10%',
-    'Мини-реактор — 17%',
-    'Технопластина — 17%',
-    'Микросхема — 17%',
-    'Сгусток неизвестной субстанции — 17%',
-    'Первичная Материя — 17%'
-  ],
-  fan:'Имперский дрон-жало.'
-},
-
-/* ---------- МЕЖДУМИРЬЕ ---------- */
-
-{
-  world:'Междумирье',
-  order:5,
-  name:'Страж междумирья',
-  drops:[
-    'Свиток «Шлем Странника Пустоты» — 6%',
-    'Свиток «Ботинки Странника Пустоты» — 6%',
-    'Свиток «Штаны Странника Пустоты» — 6%',
-    'Свиток «Кираса Странника Пустоты» — 6%',
-    'Лоскут бездны — 13%',
-    'Осколок бездны — 13%',
-    'Сингулярная жемчужина — 13%',
-    'Ядро междумирья — 13%',
-    'Кристалл скинта — 13%'
-  ],
-  fan:'Хранитель разломов.'
-},
-{
-  world:'Междумирье',
-  order:6,
-  name:'Хранитель междумирья',
-  drops:[
-    'Свиток «Шлем Странника Пустоты» — 8%',
-    'Свиток «Ботинки Странника Пустоты» — 8%',
-    'Свиток «Штаны Странника Пустоты» — 8%',
-    'Свиток «Кираса Странника Пустоты» — 8%',
-    'Лоскут бездны — 15%',
-    'Осколок бездны — 15%',
-    'Сингулярная жемчужина — 15%',
-    'Ядро междумирья — 15%',
-    'Кристалл скинта — 15%'
-  ],
-  fan:'Последний защитник.'
-}
-
-];
-
-/* ================== РЕНДЕР ================== */
-
-const cards = document.getElementById('cards');
-
-enemies.forEach(e=>{
-  const d = document.createElement('div');
-  d.className = 'card';
-  d.innerHTML = `
-    <h3>${e.order}. ${e.name}</h3>
-    <div class="world">${e.world}</div>
-    ${e.drops.map(x=>`<div class="stat">• ${x}</div>`).join('')}
-    <div class="fan-desc">${e.fan}</div>
-  `;
-  cards.appendChild(d);
-});
-
 /* вкладки */
-document.querySelectorAll('.tab').forEach(btn=>{
-  btn.onclick = ()=>{
-    document.querySelectorAll('.tab,.tab-content').forEach(x=>x.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+document.querySelectorAll('.tab').forEach(t=>{
+  t.onclick=()=>{
+    document.querySelectorAll('.tab,.tab-content').forEach(e=>e.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-'+t.dataset.tab).classList.add('active');
   }
 });
+
+/* мобы */
+const mobs=[
+  "Даливарика","Миср","Алотерра","Междумирье"
+].flatMap(world=>{
+  return Array.from({length:6},(_,i)=>({
+    name:`Моб ${i+1}`,
+    world
+  }))
+});
+
+const grid=document.getElementById("mobsGrid");
+mobs.forEach(m=>{
+  grid.innerHTML+=`
+  <div class="card">
+    <h3>${m.name}</h3>
+    <div class="world">${m.world}</div>
+    <div class="stat">Фан-описание существа</div>
+  </div>`;
+});
+
+/* достижения */
+let achievements=JSON.parse(localStorage.getItem("achievements"))||
+Array.from({length:50},(_,i)=>({
+  name:i<40?`Достижение ${i+1}`:`Секретное достижение`,
+  unlocked:false
+}));
+
+function renderAchievements(){
+  const box=document.getElementById("achievementsList");
+  box.innerHTML="";
+  achievements.forEach(a=>{
+    box.innerHTML+=`<div class="stat">${a.unlocked?"✅":"🔒"} ${a.name}</div>`;
+  });
+}
+renderAchievements();
+
+/* КОДЫ */
+function activateCode(){
+  const code=document.getElementById("codeInput").value.toLowerCase();
+
+  if(code==="code hop"){
+    achievements.forEach(a=>a.unlocked=true);
+    localStorage.setItem("achievements",JSON.stringify(achievements));
+    renderAchievements();
+    alert("Все достижения получены");
+    return;
+  }
+
+  alert("Код принят");
+}
 </script>
 
 </body>
