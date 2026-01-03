@@ -19,7 +19,7 @@
 *{box-sizing:border-box}
 body{
   margin:0;
-  background:radial-gradient(circle at top,#0a1020,#05070a 60%);
+  background:#05070a;
   color:var(--text);
   font-family:system-ui,Arial;
   font-weight:700;
@@ -53,7 +53,11 @@ h1{
 .tab.active{
   background:rgba(30,136,255,.2);
 }
-main{max-width:1200px;margin:auto;padding:20px}
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
 .tab-content{display:none}
 .tab-content.active{display:block}
 
@@ -63,7 +67,7 @@ main{max-width:1200px;margin:auto;padding:20px}
   gap:20px;
 }
 .card{
-  background:linear-gradient(180deg,#0d162a,var(--card));
+  background:#0b1220;
   border:2px solid var(--border);
   border-radius:16px;
   padding:18px;
@@ -73,26 +77,13 @@ h3{
   font-size:13px;
   color:var(--accent);
 }
-.world{color:var(--muted);font-size:12px;margin-bottom:8px}
-.stat{font-size:13px}
-
-input{
-  background:#070b14;
-  border:2px solid var(--border);
-  color:white;
-  padding:10px;
-  border-radius:10px;
-  width:100%;
-  margin-top:10px;
+.world{
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:8px;
 }
-button{
-  margin-top:10px;
-  padding:10px;
-  border-radius:10px;
-  border:2px solid var(--border);
-  background:var(--card);
-  color:white;
-  cursor:pointer;
+.stat{
+  font-size:13px;
 }
 </style>
 </head>
@@ -101,13 +92,12 @@ button{
 
 <header>
 <h1>Путь героя</h1>
-<div style="color:#ff5252;font-size:12px">⚠ фан-проект, не официальный</div>
+<div style="color:#ff5252;font-size:12px">⚠ фан-справочник</div>
 
 <div class="tabs">
   <button class="tab active" data-tab="mobs">Мобы</button>
   <button class="tab" data-tab="items">Предметы</button>
   <button class="tab" data-tab="prestige">Престиж</button>
-  <button class="tab" data-tab="settings">Настройки</button>
 </div>
 </header>
 
@@ -129,96 +119,80 @@ button{
 
 <!-- ПРЕСТИЖ -->
 <section id="tab-prestige" class="tab-content">
-  <div class="card">
-    <h3>3 уровень престижа</h3>
-    <div class="stat">Урон: 1.32x → 1.52x</div>
-    <div class="stat">Защита: 1.31x → 1.5x</div>
-    <div class="stat">Золото / Опыт: 8.41x → 24.39x</div>
-    <div class="stat"><br>Будущие уровни престижа откроются позже…</div>
-  </div>
-</section>
+  <div class="grid">
 
-<!-- НАСТРОЙКИ -->
-<section id="tab-settings" class="tab-content">
-  <div class="card">
-    <h3>Фан-режим</h3>
-    <div class="stat">Доп. сюжет и секреты (не канон)</div>
-  </div>
+    <div class="card">
+      <h3>1 уровень престижа</h3>
+      <div class="stat">Урон: 1x → 1.15x</div>
+      <div class="stat">Защита: 1x → 1.15x</div>
+      <div class="stat">Здоровье: 1x → 1.15x</div>
+      <div class="stat">Регенерация: 1x → 1.16x</div>
+      <div class="stat">Золото / Опыт: 1x → 2.9x</div>
+      <div class="stat"><br>Требования: 100 уровень</div>
+    </div>
 
-  <div class="card">
-    <h3>Ввод кода</h3>
-    <input id="codeInput" placeholder="Введите код">
-    <button onclick="activateCode()">Активировать</button>
-  </div>
+    <div class="card">
+      <h3>2 уровень престижа</h3>
+      <div class="stat">Урон: 1.15x → 1.32x</div>
+      <div class="stat">Защита: 1.15x → 1.31x</div>
+      <div class="stat">Здоровье: 1.15x → 1.32x</div>
+      <div class="stat">Регенерация: 1.16x → 1.33x</div>
+      <div class="stat">Золото / Опыт: 2.9x → 8.41x</div>
+      <div class="stat"><br>Требования: 100 уровень</div>
+    </div>
 
-  <div class="card">
-    <h3>Достижения</h3>
-    <div id="achievementsList"></div>
+    <div class="card">
+      <h3>3 уровень престижа</h3>
+      <div class="stat">Урон: 1.32x → 1.52x</div>
+      <div class="stat">Защита: 1.31x → 1.5x</div>
+      <div class="stat">Здоровье: 1.32x → 1.52x</div>
+      <div class="stat">Регенерация: 1.33x → 1.54x</div>
+      <div class="stat">Золото / Опыт: 8.41x → 24.39x</div>
+      <div class="stat"><br>Требования: Междумирье</div>
+    </div>
+
   </div>
 </section>
 
 </main>
 
 <script>
-/* вкладки */
-document.querySelectorAll('.tab').forEach(t=>{
-  t.onclick=()=>{
-    document.querySelectorAll('.tab,.tab-content').forEach(e=>e.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById('tab-'+t.dataset.tab).classList.add('active');
-  }
-});
-
-/* мобы */
-const mobs=[
-  "Даливарика","Миср","Алотерра","Междумирье"
-].flatMap(world=>{
-  return Array.from({length:6},(_,i)=>({
-    name:`Моб ${i+1}`,
-    world
-  }))
-});
-
-const grid=document.getElementById("mobsGrid");
-mobs.forEach(m=>{
-  grid.innerHTML+=`
-  <div class="card">
-    <h3>${m.name}</h3>
-    <div class="world">${m.world}</div>
-    <div class="stat">Фан-описание существа</div>
-  </div>`;
-});
-
-/* достижения */
-let achievements=JSON.parse(localStorage.getItem("achievements"))||
-Array.from({length:50},(_,i)=>({
-  name:i<40?`Достижение ${i+1}`:`Секретное достижение`,
-  unlocked:false
-}));
-
-function renderAchievements(){
-  const box=document.getElementById("achievementsList");
-  box.innerHTML="";
-  achievements.forEach(a=>{
-    box.innerHTML+=`<div class="stat">${a.unlocked?"✅":"🔒"} ${a.name}</div>`;
+/* ВКЛАДКИ — РАБОТАЮТ */
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
   });
-}
-renderAchievements();
+});
 
-/* КОДЫ */
-function activateCode(){
-  const code=document.getElementById("codeInput").value.toLowerCase();
+/* МОБЫ — 6 В КАЖДОМ МИРЕ */
+const mobs = [
+  // Даливарика
+  ["Нежить","Векс","Поборник","Элементаль","Гримуар","Некромант"],
+  // Миср
+  ["Разбойник","Тоифэтун","Жук","Скорпион","Чудовище","Отверженный"],
+  // Алотерра
+  ["Страж","Воин","Маг","Охотник","Берсерк","Командор"],
+  // Междумирье
+  ["Убийца","Призрачный олень","Наблюдатель","Скорпион Бездны","Страж Бездны","Хранитель"]
+];
 
-  if(code==="code hop"){
-    achievements.forEach(a=>a.unlocked=true);
-    localStorage.setItem("achievements",JSON.stringify(achievements));
-    renderAchievements();
-    alert("Все достижения получены");
-    return;
-  }
+const worlds = ["Даливарика","Миср","Алотерра","Междумирье"];
+const grid = document.getElementById("mobsGrid");
 
-  alert("Код принят");
-}
+worlds.forEach((world,w)=>{
+  mobs[w].forEach((name,i)=>{
+    grid.innerHTML += `
+      <div class="card">
+        <h3>${i+1}. ${name}</h3>
+        <div class="world">${world}</div>
+        <div class="stat">Дроп и шансы см. выше</div>
+      </div>
+    `;
+  });
+});
 </script>
 
 </body>
